@@ -6,7 +6,9 @@ SCRAPING_URL = "http://books.toscrape.com/catalogue/page-{PAGE_NO}.html"
 
 
 def scrapingBooks(page):
-    html = requests.get(SCRAPING_URL.replace('{PAGE_NO}', page))
+    transform_url = SCRAPING_URL.replace('{PAGE_NO}', page)
+    print(transform_url)
+    html = requests.get(transform_url)
     soup = BeautifulSoup(html.text, 'lxml')
     article_div_wrapper = soup.find_all('article', attrs={'class': 'product_pod'})
     for parent in article_div_wrapper:
